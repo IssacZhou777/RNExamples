@@ -5,7 +5,6 @@ import {
 	Alert,
   	StyleSheet,
   	Text,
-  	Image,
   	TouchableHighlight,
     TouchableNativeFeedback,
     TouchableOpacity,
@@ -13,11 +12,15 @@ import {
   	View
 } from 'react-native'
 
-class ButtonExample extends React.Component {
+export default class ButtonExample extends React.Component {
 
   _onPress() {
+    console.log('_onPress');
+  }
+
+  _onLongPress() {
     Alert.alert(
-      'Clicked',
+      'Long Press',
       null,
       [
         {text: 'OK', onPress: () => console.log('OK Pressed')},
@@ -26,39 +29,44 @@ class ButtonExample extends React.Component {
   }
 
   render() {
-    return {
+    return (
       <View style={styles.container}>
-          <TouchableHighlight onPress={this._onPress} style={styles.button} underlayColor={'#FFFF00'}>
-            <Text>TouchableHighlight</Text>
+          <TouchableHighlight onPress={this._onPress} onLongPress={this._onLongPress} style={styles.button} underlayColor={'#FFFF00'}>
+          <View>
+            <Text style={{margin: 30}}>TouchableHighlight</Text>
+          </View>
           </TouchableHighlight>
 
           <TouchableNativeFeedback onPress={this._onPress} backgroundColor={TouchableNativeFeedback.SelectableBackground()} style={styles.button}>
-            <Text style={margin:30}>TouchableNativeFeedback</Text>
+          <View >
+            <Text style={{margin: 30}}>TouchableNativeFeedback</Text>
+          </View>
           </TouchableNativeFeedback>
 
-          <TouchableOpacity onPress={this.onPress} style={styles.button}>
-            <Text style={margin:30}>TouchableOpacity</Text>
+          <TouchableOpacity onPress={this._onPress} style={styles.button} onLongPress={this._onLongPress}>
+          <View>
+            <Text style={{margin: 30}}>TouchableOpacity</Text>
+          </View>
           </TouchableOpacity>
 
-          <TouchableWithoutFeedback onPress={this._onPress} style={styles.button}>
-            <Text style={margin:30}>TouchableWithoutFeedback</Text>
+          <TouchableWithoutFeedback onPress={this._onPress} onLongPress={this._onLongPress} style={styles.button}>
+          <View >
+            <Text style={{margin: 30}}>TouchableWithoutFeedback</Text>
+          </View>
           </TouchableWithoutFeedback>
-
       </View>
-    }
+    );
   }
 }
 
-const StyleSheet styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   button:{
-    width: 80,
-    height:40,
-    alignItems:center,
-    backgroundColor:'#0000FF'
+    alignItems:'center',
+    backgroundColor:'#7b68ee'
   },
-}
+});

@@ -2,36 +2,45 @@
 
 import React from 'react';
 import {
-	Alert,
+		Alert,
   	StyleSheet,
   	Text,
   	Image,
   	TouchableHighlight,
   	ScrollView,
+		Navigator,
+		BackAndroid,
+		Platform,
   	View
-} from 'react-native'
+} from 'react-native';
+
+import ButtonExample from './touch/ButtonExamples';
+import ViewPagerAndroidExample from './touch/ViewPagerAndroidExample'
 
 export default class IndexComponent extends React.Component {
-
+	
 	    render() {
 	      return (
 	      	<View style={styles.container}>
-
 	      		<Text style={styles.welcome}>React Native UI: </Text>
 
 	          	<ScrollView style={styles.ScrollView}>
 
 		          	<TouchableHighlight onPress={() => {
-		          		Alert.alert(
-				          'button is clicked',
-				          null,
-				          [
-				            {text: 'OK', onPress: () => console.log('OK Pressed')},
-				          ],
-				          {cancelable: true});
-		          	}} style={styles.button} underlayColor={'#FF0000'}>
-		            	<Text>Buttons</Text>
+									this.props.navigator.push({name:'ButtonExample', component: ButtonExample});
+								}} style={styles.button} underlayColor={'#FF0000'}>
+								<View >
+			            <Text style={{margin: 30}}>ButtonExample</Text>
+			          </View>
 		        	</TouchableHighlight>
+
+							<TouchableHighlight onPress={() => {
+									this.props.navigator.push({name:'ViewPagerAndroidExample', component: ViewPagerAndroidExample});
+							}} style={styles.button} underlayColor={'#FF0000'}>
+							<View >
+								<Text style={{margin: 30}}>ViewPagerAndroid</Text>
+							</View>
+						</TouchableHighlight>
 
 	          	</ScrollView>
 	        </View>
@@ -80,9 +89,8 @@ export default class IndexComponent extends React.Component {
 	    height: 100,
 	  },
 	  button: {
-	    width: 400,
-	    height: 80,
 	    alignItems: 'center',
+			backgroundColor:'#7b68ee'
 	  },
 	  scrollView: {
 	  	flex: 1,
